@@ -6,9 +6,9 @@
 # ============================================================
 gitops:
   # Repository containing the component charts
-  repoUrl: "https://github.com/rhpds/field-sourced-content-template.git"
+  repoUrl: "https://github.com/rhatada/fscm.git"
   revision: "main"
-  basePath: "examples/helm"
+  basePath: "helm"
 
 # ArgoCD settings
 argocd:
@@ -21,56 +21,38 @@ argocd:
 components:
 
   # --- Operator Installation ---
-  operator:
-    # Set to true to install the operator via OLM
-    # Set to false if operator is already installed on cluster
-    enabled: false
-    name: web-terminal
-    namespace: openshift-operators
-    channel: fast
+  mta-operator:
+    enabled: true
+    name: mta-operator
+    namespace: openshift-mta
+    channel: stable-v8.0
     source: redhat-operators
     sourceNamespace: openshift-marketplace
     installPlanApproval: Automatic
-
-  # --- Hello World Demo Application ---
-  helloWorld:
+  cloudnative-pg:
     enabled: true
-    namespace: terminal-demo
-    appName: hello-world
-    replicas: 1
-    image: registry.redhat.io/ubi8/httpd-24:latest
-    # User information for RHDP integration
-    userInfo:
-      enabled: true
-      title: "Web Terminal Demo"
-      instructions: "Access the Showroom lab guide, then click the terminal icon (>_) in the OpenShift console."
-
-  # --- Showroom Lab Guide ---
-  showroom:
+    name: cloudnative-pg
+    namespace: cnpg-system
+    channel: stable-v1
+    source: certified-operators
+    sourceNamespace: openshift-marketplace
+    installPlanApproval: Automatic
+  devspaces:
     enabled: true
-    namespace: showroom
-    name: showroom
-    # Lab guide Git repository - UPDATE THIS to your content repository
-    content:
-      repoUrl: "https://github.com/rhpds/showroom_template_nookbag.git"
-      repoRef: "main"
-      antoraPlaybook: "site.yml"
-      image: "quay.io/rhpds/showroom-content:v1.3.1"
-    # Nookbag bundle (enables LlamaStack, multiple terminals, Zero Trust UI)
-    nookbag:
-      enabled: true
-      bundleUrl: "https://github.com/rhpds/nookbag/releases/download/nookbag-v0.2.1/nookbag-v0.2.1.zip"
-    # Embedded terminal configuration
-    terminal:
-      enabled: true
-      image: "quay.io/rhpds/openshift-showroom-terminal-ocp:latest"
-      resources:
-        requests:
-          cpu: "500m"
-          memory: "512Mi"
-        limits:
-          cpu: "500m"
-          memory: "1Gi"
+    name: devspaces
+    namespace: openshift-devspaces
+    channel: stable
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+    installPlanApproval: Automatic
+  rhbk-operator:
+    enabled: true
+    name: rhbk-operator
+    namespace: keycloak-operator
+    channel: stable-v26
+    source: redhat-operators
+    sourceNamespace: openshift-marketplace
+    installPlanApproval: Automatic
 
 # ============================================================
 # Values injected by field content workload (do not modify)
