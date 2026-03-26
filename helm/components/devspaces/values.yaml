@@ -1,8 +1,0 @@
-devspaces:
-  enabled: true
-  name: devspaces
-  namespace: openshift-devspaces
-  channel: stable
-  source: redhat-operators
-  sourceNamespace: openshift-marketplace
-  installPlanApproval: Automatic

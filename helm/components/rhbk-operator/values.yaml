@@ -1,8 +1,0 @@
-rhbk-operator:
-  enabled: true
-  name: rhbk-operator
-  namespace: keycloak-operator
-  channel: stable-v26
-  source: redhat-operators
-  sourceNamespace: openshift-marketplace
-  installPlanApproval: Automatic

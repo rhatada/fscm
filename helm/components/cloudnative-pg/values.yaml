@@ -1,8 +1,0 @@
-cloudnative-pg:
-  enabled: true
-  name: cloudnative-pg
-  namespace: cnpg-system
-  channel: stable-v1
-  source: certified-operators
-  sourceNamespace: openshift-marketplace
-  installPlanApproval: Automatic

@@ -39,6 +39,7 @@ spec:
 {{- end }}
 
 {{- if .Values.components.cloudnative-pg.enabled }}
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -76,6 +77,7 @@ spec:
 {{- end }}
 
 {{- if .Values.components.devspaces.enabled }}
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -113,6 +115,7 @@ spec:
 {{- end }}
 
 {{- if .Values.components.rhbk-operator.enabled }}
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
