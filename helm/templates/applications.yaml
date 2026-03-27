@@ -5,7 +5,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Release.Name }}-mta-operator
+  name: {{ .Release.Name }}-mta
   namespace: {{ .Values.argocd.namespace }}
   labels:
     demo.redhat.com/application: "field-content"
@@ -43,7 +43,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Release.Name }}-cloudnative-pg
+  name: {{ .Release.Name }}-cnpg
   namespace: {{ .Values.argocd.namespace }}
   labels:
     demo.redhat.com/application: "field-content"
@@ -119,7 +119,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Release.Name }}-rhbk-operator
+  name: {{ .Release.Name }}-rhbk
   namespace: {{ .Values.argocd.namespace }}
   labels:
     demo.redhat.com/application: "field-content"

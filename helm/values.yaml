@@ -21,7 +21,7 @@ argocd:
 components:
 
   # --- Operator Installation ---
-  mta-operator:
+  mta:
     enabled: true
     name: mta-operator
     namespace: openshift-mta
@@ -29,7 +29,7 @@ components:
     source: redhat-operators
     sourceNamespace: openshift-marketplace
     installPlanApproval: Automatic
-  cloudnative-pg:
+  cnpg:
     enabled: true
     name: cloudnative-pg
     namespace: cnpg-system
@@ -45,7 +45,7 @@ components:
     source: redhat-operators
     sourceNamespace: openshift-marketplace
     installPlanApproval: Automatic
-  rhbk-operator:
+  rhbk:
     enabled: true
     name: rhbk-operator
     namespace: keycloak-operator
