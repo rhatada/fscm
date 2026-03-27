@@ -1,5 +1,5 @@
 mta-operator:
- enabled: true
+  enabled: true
   name: mta-operator
   namespace: openshift-mta
   channel: stable-v8.0
