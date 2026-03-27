@@ -2,7 +2,7 @@
 # App of Apps Pattern
 # This template generates ArgoCD Applications for each enabled component
 
-{{- if .Values.components.mta-operator.enabled }}
+{{ if .Values.components.mta-operator.enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -38,9 +38,9 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-{{- end }}
+{{ end }}
 
-{{- if .Values.components.cloudnative-pg.enabled }}
+{{ if .Values.components.cloudnative-pg.enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -76,9 +76,9 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-{{- end }}
+{{ end }}
 
-{{- if .Values.components.devspaces.enabled }}
+{{ if .Values.components.devspaces.enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -114,9 +114,9 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-{{- end }}
+{{ end }}
 
-{{- if .Values.components.rhbk-operator.enabled }}
+{{ if .Values.components.rhbk-operator.enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -152,4 +152,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-{{- end }}
+{{ end }}
