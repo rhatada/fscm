@@ -16,7 +16,7 @@ spec:
   source:
     repoURL: {{ .Values.gitops.repoUrl }}
     targetRevision: {{ .Values.gitops.revision }}
-    path: {{ .Values.gitops.basePath }}/components/operator
+    path: {{ .Values.gitops.basePath }}/components/mta-operator
     helm:
       valuesObject:
         operator:
@@ -53,7 +53,7 @@ spec:
   source:
     repoURL: {{ .Values.gitops.repoUrl }}
     targetRevision: {{ .Values.gitops.revision }}
-    path: {{ .Values.gitops.basePath }}/components/operator
+    path: {{ .Values.gitops.basePath }}/components/cloudnative-pg
     helm:
       valuesObject:
         operator:
@@ -90,7 +90,7 @@ spec:
   source:
     repoURL: {{ .Values.gitops.repoUrl }}
     targetRevision: {{ .Values.gitops.revision }}
-    path: {{ .Values.gitops.basePath }}/components/operator
+    path: {{ .Values.gitops.basePath }}/components/devspaces
     helm:
       valuesObject:
         operator:
@@ -127,7 +127,7 @@ spec:
   source:
     repoURL: {{ .Values.gitops.repoUrl }}
     targetRevision: {{ .Values.gitops.revision }}
-    path: {{ .Values.gitops.basePath }}/components/operator
+    path: {{ .Values.gitops.basePath }}/components/rhbk-operator
     helm:
       valuesObject:
         operator:
