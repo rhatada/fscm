@@ -8,8 +8,10 @@ metadata:
   name: {{ .Values.operator.name }}-og
   namespace: {{ .Values.operator.namespace }}
 spec:
+  {{- if not .Values.operator.allNamespaces }}
   targetNamespaces:
     - {{ .Values.operator.namespace }}
+  {{- end }}
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription

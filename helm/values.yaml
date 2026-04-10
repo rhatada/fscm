@@ -45,6 +45,7 @@ components:
     source: redhat-operators
     sourceNamespace: openshift-marketplace
     installPlanApproval: Automatic
+    allNamespaces: true  # DevWorkspace requires AllNamespaces mode
   rhbk:
     enabled: true
     name: rhbk-operator

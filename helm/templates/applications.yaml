@@ -29,6 +29,9 @@ spec:
           source: {{ $config.source }}
           sourceNamespace: {{ $config.sourceNamespace }}
           installPlanApproval: {{ $config.installPlanApproval }}
+          {{- if $config.allNamespaces }}
+          allNamespaces: {{ $config.allNamespaces }}
+          {{- end }}
   destination:
     server: https://kubernetes.default.svc
     namespace: {{ $config.namespace }}
