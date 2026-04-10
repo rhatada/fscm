@@ -9,6 +9,8 @@ metadata:
   namespace: {{ .Values.operator.namespace }}
   labels:
     demo.redhat.com/application: {{ .Values.operator.name | quote }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   channel: {{ .Values.operator.channel }}
   installPlanApproval: {{ .Values.operator.installPlanApproval }}

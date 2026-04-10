@@ -55,6 +55,30 @@ components:
     installPlanApproval: Automatic
 
 # ============================================================
+# Secrets - Created after operators are installed
+# ============================================================
+secrets:
+  enabled: false
+  name: kai-api-keys
+  namespace: openshift-mta
+  type: Opaque
+  # OPENAI_API_KEY is automatically set from litemaas.apiKey
+  # OPENAI_API_BASE is automatically set from litemaas.apiUrl
+
+# ============================================================
+# Tackle CR - Created after operators are installed
+# ============================================================
+tackle:
+  enabled: false
+  name: tackle
+  namespace: openshift-mta
+  spec:
+    feature_auth_required: 'true'
+    kai_llm_provider: OpenAI
+    kai_solution_server_enabled: true
+    # kai_llm_model is automatically set from litemaas.model
+
+# ============================================================
 # Values injected by field content workload (do not modify)
 # ============================================================
 deployer:
@@ -63,3 +87,9 @@ deployer:
 
 fieldContent:
   deploymentType: "helm"
+
+litemaas:
+  enabled: true  # RHDP sets this to true automatically
+  apiUrl: ""
+  apiKey: ""
+  model: "llama-scout-17b"
