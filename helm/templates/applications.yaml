@@ -1,149 +1,37 @@
 # App of Apps Pattern
 # This template generates ArgoCD Applications for each enabled component
 
-{{- if .Values.components.mta-operator.enabled }}
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: {{ .Release.Name }}-mta-operator
-  namespace: {{ .Values.argocd.namespace }}
-  labels:
-    demo.redhat.com/application: "field-content"
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  project: {{ .Values.argocd.project }}
-  source:
-    repoURL: {{ .Values.gitops.repoUrl }}
-    targetRevision: {{ .Values.gitops.revision }}
-    path: {{ .Values.gitops.basePath }}/components/operator
-    helm:
-      valuesObject:
-        operator:
-          enabled: {{ .Values.components.mta-operator.enabled }}
-          name: {{ .Values.components.mta-operator.name }}
-          namespace: {{ .Values.components.mta-operator.namespace }}
-          channel: {{ .Values.components.mta-operator.channel }}
-          source: {{ .Values.components.mta-operator.source }}
-          sourceNamespace: {{ .Values.components.mta-operator.sourceNamespace }}
-          installPlanApproval: {{ .Values.components.mta-operator.installPlanApproval }}
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: {{ .Values.components.mta-operator.namespace }}
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-{{- end }}
-
-{{- if .Values.components.cloudnative-pg.enabled }}
+{{- range $name, $config := .Values.components }}
+{{- if $config.enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Release.Name }}-cloudnative-pg
-  namespace: {{ .Values.argocd.namespace }}
+  name: {{ $.Release.Name }}-{{ $name }}
+  namespace: {{ $.Values.argocd.namespace }}
   labels:
     demo.redhat.com/application: "field-content"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: {{ .Values.argocd.project }}
+  project: {{ $.Values.argocd.project }}
   source:
-    repoURL: {{ .Values.gitops.repoUrl }}
-    targetRevision: {{ .Values.gitops.revision }}
-    path: {{ .Values.gitops.basePath }}/components/operator
+    repoURL: {{ $.Values.gitops.repoUrl }}
+    targetRevision: {{ $.Values.gitops.revision }}
+    path: {{ $.Values.gitops.basePath }}/components/operator
     helm:
       valuesObject:
         operator:
-          enabled: {{ .Values.components.cloudnative-pg.enabled }}
-          name: {{ .Values.components.cloudnative-pg.name }}
-          namespace: {{ .Values.components.cloudnative-pg.namespace }}
-          channel: {{ .Values.components.cloudnative-pg.channel }}
-          source: {{ .Values.components.cloudnative-pg.source }}
-          sourceNamespace: {{ .Values.components.cloudnative-pg.sourceNamespace }}
-          installPlanApproval: {{ .Values.components.cloudnative-pg.installPlanApproval }}
+          enabled: {{ $config.enabled }}
+          name: {{ $config.name }}
+          namespace: {{ $config.namespace }}
+          channel: {{ $config.channel }}
+          source: {{ $config.source }}
+          sourceNamespace: {{ $config.sourceNamespace }}
+          installPlanApproval: {{ $config.installPlanApproval }}
   destination:
     server: https://kubernetes.default.svc
-    namespace: {{ .Values.components.cloudnative-pg.namespace }}
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-{{- end }}
-
-{{- if .Values.components.devspaces.enabled }}
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: {{ .Release.Name }}-devspaces
-  namespace: {{ .Values.argocd.namespace }}
-  labels:
-    demo.redhat.com/application: "field-content"
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  project: {{ .Values.argocd.project }}
-  source:
-    repoURL: {{ .Values.gitops.repoUrl }}
-    targetRevision: {{ .Values.gitops.revision }}
-    path: {{ .Values.gitops.basePath }}/components/operator
-    helm:
-      valuesObject:
-        operator:
-          enabled: {{ .Values.components.devspaces.enabled }}
-          name: {{ .Values.components.devspaces.name }}
-          namespace: {{ .Values.components.devspaces.namespace }}
-          channel: {{ .Values.components.devspaces.channel }}
-          source: {{ .Values.components.devspaces.source }}
-          sourceNamespace: {{ .Values.components.devspaces.sourceNamespace }}
-          installPlanApproval: {{ .Values.components.devspaces.installPlanApproval }}
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: {{ .Values.components.devspaces.namespace }}
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-{{- end }}
-
-{{- if .Values.components.rhbk-operator.enabled }}
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: {{ .Release.Name }}-rhbk-operator
-  namespace: {{ .Values.argocd.namespace }}
-  labels:
-    demo.redhat.com/application: "field-content"
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  project: {{ .Values.argocd.project }}
-  source:
-    repoURL: {{ .Values.gitops.repoUrl }}
-    targetRevision: {{ .Values.gitops.revision }}
-    path: {{ .Values.gitops.basePath }}/components/operator
-    helm:
-      valuesObject:
-        operator:
-          enabled: {{ .Values.components.rhbk-operator.enabled }}
-          name: {{ .Values.components.rhbk-operator.name }}
-          namespace: {{ .Values.components.rhbk-operator.namespace }}
-          channel: {{ .Values.components.rhbk-operator.channel }}
-          source: {{ .Values.components.rhbk-operator.source }}
-          sourceNamespace: {{ .Values.components.rhbk-operator.sourceNamespace }}
-          installPlanApproval: {{ .Values.components.rhbk-operator.installPlanApproval }}
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: {{ .Values.components.rhbk-operator.namespace }}
+    namespace: {{ $config.namespace }}
   syncPolicy:
     automated:
       prune: true
