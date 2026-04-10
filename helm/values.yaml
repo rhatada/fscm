@@ -58,7 +58,7 @@ components:
 # Secrets - Created after operators are installed
 # ============================================================
 secrets:
-  enabled: false
+  enabled: true
   name: kai-api-keys
   namespace: openshift-mta
   type: Opaque
@@ -69,7 +69,7 @@ secrets:
 # Tackle CR - Created after operators are installed
 # ============================================================
 tackle:
-  enabled: false
+  enabled: true
   name: tackle
   namespace: openshift-mta
   spec:
