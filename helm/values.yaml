@@ -80,6 +80,20 @@ tackle:
     # kai_llm_model is automatically set from litemaas.model
 
 # ============================================================
+# Dev Space Instance - Created after operators are installed
+# ============================================================
+devspaces_instance:
+  enabled: true
+  name: devspaces
+  namespace: openshift-devspaces
+  devEnvironments:
+    startTimeoutSeconds: 300
+    secondsOfRunBeforeIdling: -1
+    maxNumberOfWorkspacesPerUser: -1
+    maxNumberOfRunningWorkspacesPerUser: -1
+    secondsOfInactivityBeforeIdling: 1800
+
+# ============================================================
 # Values injected by field content workload (do not modify)
 # ============================================================
 deployer:
